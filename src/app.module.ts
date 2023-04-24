@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { CustomerResolver } from '@resolvers/customer.resolver';
@@ -19,6 +19,6 @@ import appConfig from '@configs/app.config';
       },
     }),
   ],
-  providers: [CustomerResolver, CustomerService],
+  providers: [CustomerResolver, CustomerService, Logger],
 })
 export class AppModule {}

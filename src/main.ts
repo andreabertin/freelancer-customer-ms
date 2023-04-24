@@ -1,12 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
-import { AppConfig, APP_CONFIG_KEY } from '@configs/app.config';
+import { APP_CONFIG_KEY, AppConfig } from '@configs/app.config';
+import logger from '@configs/logging.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const config = app.get(ConfigService);
   const appConfig = config.getOrThrow<AppConfig>(APP_CONFIG_KEY);
+  app.useLogger(logger(appConfig));
   await app.listen(appConfig.port);
 }
 
